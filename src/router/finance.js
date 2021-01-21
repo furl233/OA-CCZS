@@ -18,4 +18,14 @@ export default [{
     name: 'Labour_service',
     component: () => import('@/pages/Finance/components/Labour_service.vue')
   },
+  {
+    path: 'labour_contract',
+    name: 'Labour_contract',
+    component: () => import('@/pages/Finance/components/Labour_contract.vue'),
+  },
+  {
+    path: 'contractdetail/:id',
+    name: 'contractdetail',
+    component: () => import('@/pages/Finance/components/Detailpages/contractdetail.vue'),
+  }
 ]

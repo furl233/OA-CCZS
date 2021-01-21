@@ -1,11 +1,7 @@
 <template>
    <v-app class="blue accent-2 rounded-lg">
          <v-container>
-<<<<<<< HEAD
             <v-row dense >
-=======
-            <v-row dense>
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
                 <v-col cols="12">
                      <v-card color="#385F73" dark>
                         <v-card-title class="headline">公司证照</v-card-title>
@@ -69,7 +65,6 @@
                         </v-card-actions>
                     </v-card>
                 </v-col>
-<<<<<<< HEAD
                 <v-row dense class="d-flex">
                     <v-col cols=9 md="3" v-for="(item,index) in cards"  :key="index">
                             <v-card elevation="22">
@@ -160,97 +155,6 @@
                 
 
             <v-dialog v-model="dialogload" hide-overlay persistent  width="300">
-=======
-
-                <v-col cols=12 xs="6" sm="6" md="3" v-for="(item,index) in cards"  :key="index">
-                        <v-card elevation="22" outlined >
-                            <v-app-bar color="indigo">
-                                  <v-toolbar-title class="white--text">{{item.name}}</v-toolbar-title>
-                            </v-app-bar>
-                            <v-avatar class="ma-3" size="230" tile>
-                            <v-img class="black--text align-end"
-                            :src="pic(item.image_url)" :aspect-ratio="16/9" height="280">
-                            </v-img>
-                            </v-avatar>
-                            <v-card-subtitle class="pb-0 black--text">发证日期:{{item.certificate_time}}</v-card-subtitle>
-                            <v-card-text class="pb-0 black--text">
-                                <div>ID号:{{item.certificate_id}}</div>
-                                <div>发证单位:{{item.licensing_agency}}</div>
-                            </v-card-text>  
-                        <v-dialog v-model="updatedialog" max-width="600px">
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn color="blue" :loading="loading" text @click.stop="find_cards(item._id)" v-bind="attrs" v-on="on">更改</v-btn>
-                            </template>
-                                <v-card>
-                                    <v-card-title>
-                                        <span class="headline">更新 证照信息</span>
-                                    </v-card-title>
-                                    <v-card-text>
-                                        <v-container>
-                                        <v-row>
-                                            <v-col cols="12" sm="6" md="4">
-                                    <v-text-field label="执照名字*" required v-model="updatelicence.name"></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12" sm="6" md="4">
-                                    <v-text-field label="认证时间" hint="证件所标明的生效时间" v-model="updatelicence.certificate_time" type="date"></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field label="证件ID*" hint="证件上标明的证件号码" persistent-hint required v-model="updatelicence.certificate_id"></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field label="有效年限" type='number' v-model="updatelicence.valid_period"></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12" sm="6" md="4">
-                                                        <v-text-field label="发证机关*" required v-model="updatelicence.licensing_agency"></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12" sm="6" md="4">
-                                                        <v-text-field label="资质类别*" required v-model="updatelicence.category"></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12" sm="12">
-                                        <v-card class="mx-auto"  outlined min-height="100%" color="#1F7087" :img='updatelicence.image_url'>
-                                            <v-layout column align-center>
-                                                <v-flex class="mt-8 mb-8">
-                                                    <input type="file" accept="image/png, image/jpeg, image/bmp" ref="UploadImg2" style="display:none" @change="getUploadFile()">
-                                                        <v-btn color="blue-grey" class="ma-2 white--text" @click.stop="clickinput2">
-                                                        上传证照照片
-                                                        <v-icon right dark>mdi-cloud-upload</v-icon>
-                                                        </v-btn>
-                                                </v-flex>
-                                            </v-layout>
-                                        </v-card>
-                                            </v-col>
-                                        </v-row>
-                                        </v-container>
-                                        <small>*indicates required field</small>
-                                    </v-card-text>
-                                    <v-card-actions>
-                                        <v-spacer></v-spacer>
-                                        <v-btn color="blue darken-1" text @click.stop="closedupdatedialog">关闭</v-btn>
-                                        <v-btn color="blue darken-1" text @click.stop='update_cards'>保存上传</v-btn>
-                                    </v-card-actions>
-                                </v-card>
-                        </v-dialog>
-
-                        <v-dialog v-model="dialogdelete" persistent max-width="290">
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn color="blue" outlined :loading="loading" v-bind="attrs" v-on="on" @click.stop="dialogdelete = !dialogdelete">删除</v-btn>
-                            </template>
-                                <v-card>
-                                <v-card-title class="headline">确定删除吗?</v-card-title>
-                                <v-card-text>删除后不能恢复,确定要删除吗?</v-card-text>
-                                    <v-card-actions>
-                                        <v-spacer></v-spacer>
-                                        <v-btn color="blue darken-1 white--text" @click.stop="dialogdelete = false">算了</v-btn>
-                                        <v-btn color="blue darken-1 white--text" @click.stop="delete_cards(item._id)">确定</v-btn>
-                                    </v-card-actions>
-                                </v-card>
-                        </v-dialog>
-                    </v-card> 
-                </v-col>
-                
-
-            <v-dialog v-model="dialogload" persistent hide-overlay width="300">
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
                 <v-card color="primary" dark>
                     <v-card-text>请稍等
                         <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
@@ -264,11 +168,7 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import SnapBar from '@/components/SnapBar.vue';
-=======
-import SnapBar from '../../../components/SnapBar.vue';
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
 export default {
     props:{licences:Array},
     name: 'License',

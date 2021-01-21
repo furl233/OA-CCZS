@@ -3,7 +3,6 @@
          <v-container>
             <v-row dense>
                 <v-col cols="12">
-<<<<<<< HEAD
                     <v-card dense color="white" min-height="700">
                         <v-card-title class="h3 indigo white--text" dense>   
                                 证照查找
@@ -126,14 +125,6 @@
                                 </v-row>
                                 </v-container>
                             </div>    
-=======
-                     <v-card color="#385F73" dark>
-                        <v-card-title class="headline">人员执照</v-card-title>
-                        <v-card-subtitle>Listen to your favorite artists and albums whenever and wherever, online and offline.</v-card-subtitle>
-                        <v-card-actions>
-                            <v-btn text>Listen Now</v-btn>
-                        </v-card-actions>
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
                     </v-card>
                 </v-col>
             </v-row>
@@ -142,7 +133,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import {work_name,ArrayOne,ArrayTwo,ArrayThree,ArrayFour,ArrayFive,ArraySix,Department} from '@/assets/employee/work_name.js'
 export default {
     name: 'Humansource',
@@ -275,7 +265,7 @@ export default {
 
         setParticipants(departement){
             this.loadingData.setParticipants = true
-            this.$http.get(`http://192.168.50.132:3000/users/getallusers?per_page=10&page=1&keyword=${departement}`)
+            this.$http.get(`http://localhost:3000/users/getallusers?per_page=10&page=1&keyword=${departement}`)
             .then(res => {let user =  []
                         for (let i=0; i < res.data.userlist.length ; i++){
                         user.push(res.data.userlist[i]["username"]);}
@@ -295,7 +285,7 @@ export default {
         },
 
         search(value){
-            this.$http.get(`http://192.168.50.132:3000/users/exactcertificates?per_page=10&page=1&name=${value}`)
+            this.$http.get(`http://localhost:3000/users/exactcertificates?per_page=10&page=1&name=${value}`)
             .then(res => {let user =  []
                         for (let i=0; i < res.data.userlist.length ; i++){
                         user.push(res.data.userlist[i]["professionaltitle"]);}
@@ -343,9 +333,3 @@ export default {
 }
 </script>
 
-=======
-export default {
-    name: 'Humansource',
-}
-</script>
->>>>>>> 0052218504708c33ecd611734c095f0d71514235

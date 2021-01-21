@@ -1,10 +1,6 @@
 export default [{
     path: 'home',
-<<<<<<< HEAD
     name: 'ADHome',
-=======
-    name: 'Home',
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
     component: () => import('@/pages/Administrator/components/Home.vue')
   },
     {

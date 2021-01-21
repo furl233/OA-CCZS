@@ -1,7 +1,6 @@
 <template>
    <v-app class="blue accent-2 rounded-lg">
-<<<<<<< HEAD
-         <v-container>
+         <v-container >
             <v-row dense>
                 <v-col cols="12" md="12">
                     <v-card color="white" min-height="600">
@@ -181,15 +180,11 @@
                 </v-col>
             </v-row>
          </v-container>
-=======
-         
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
     </v-app>
 </template>
 
 <script>
 export default {
-<<<<<<< HEAD
     props:{employees:Array},
     name: 'Weeklyreport',
     data(){
@@ -312,18 +307,5 @@ export default {
         this.participants.push('全体员工')
     }
     
-=======
-    name: 'Weeklyreport',
-    data(){
-        return{
-            cards:[{avatat:'',name:'',department:'',position:''}]
-        }
-    },
-    methods:{
-        add_cards(){
-            this.cards.push({avatat:'',name:'',department:'',position:''})
-        }
-    }
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
 }
 </script>

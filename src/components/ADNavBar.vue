@@ -52,11 +52,7 @@ export default {
         links:[
             {icon:'fas fa-home',text:'主页',route:'/administrator/home'},
             {icon:'fas fa-user-cog',text:'人事管理',route:'/administrator/humansource'},
-<<<<<<< HEAD
             {icon:'fas fa-calendar-week',text:'会议纪要',route:'/administrator/weeklyreport'},
-=======
-            {icon:'fas fa-calendar-week',text:'每周会议发布',route:'/administrator/weeklyreport'},
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
             {icon:'fas fa-certificate',text:'公司证照管理',route:'/administrator/license'},
             {icon:'fas fa-id-badge',text:'人员证照管理',route:'/administrator/certificate'},
             {icon:'fas fa-car',text:'车辆管理',route:'/administrator/Vehicle'},

@@ -7,27 +7,16 @@
                         <v-card-title class="headline">车辆管理</v-card-title>
                         <v-card-subtitle>系统化管理公司车辆,包括定期提醒保养,使用出行记录等等</v-card-subtitle>
                         <v-card-actions>
-<<<<<<< HEAD
                             <v-btn text @click="showcards">模糊搜索</v-btn>
-=======
-                            <v-btn text @click="showcards">Listen Now</v-btn>
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
                         </v-card-actions>
                     </v-card>
                 </v-col>
                     <v-dialog v-model="currentdialog.dialog" persistent max-width="600px">
                         <template v-slot:activator="{ on, attrs }">
-<<<<<<< HEAD
                             <v-col cols="12" md="3" v-for="(item,index) in cards" :key="index">
                             <v-hover v-slot="{ hover }">
                             <v-card color="blue darken-3" dark :elevation="hover ? 24 : 0">
                                 <div class="d-flex flex-no-wrap justify-space-between text-no-wrap text-truncate" transition="fab-transition">
-=======
-                        <v-col cols="12" md="3" v-for="(item,index) in cards" :key="index">
-                            <v-hover v-slot="{ hover }">
-                            <v-card color="#1F7087" dark :elevation="hover ? 24 : 0">
-                            <div class="d-flex flex-no-wrap justify-space-between text-no-wrap text-truncate" transition="fab-transition">
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
                                 <div>
                                     <v-card-title class="headline text-truncate" style="max-width: 150px" v-text="item.brand"></v-card-title>
                                     <v-card-subtitle class="text-uppercase" v-text="item.plates_num"></v-card-subtitle>
@@ -46,7 +35,6 @@
                                         </v-dialog>       
                                     </v-card-actions> 
                                 </div>
-<<<<<<< HEAD
                                 <v-avatar class="ma-1" tile size="130">
                                     <v-img :src="item.src"></v-img>
                                 </v-avatar>
@@ -56,17 +44,6 @@
                             </v-col>
                         </template>
                     <v-card>
-=======
-                                <v-avatar class="ma-1" tile size="90">
-                                    <v-img :src="item.src"></v-img>
-                                </v-avatar>
-                            </div>
-                            </v-card>
-                            </v-hover>
-                        </v-col>
-                        </template>
-                        <v-card>
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
                         <v-card-title>
                             <span class="headline" @click="showimg">当前 车辆</span>
                         </v-card-title>
@@ -150,29 +127,17 @@
                                 </v-card>
                             </v-dialog>
                         </v-card-actions>
-<<<<<<< HEAD
                     </v-card>
-=======
-                        </v-card>
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
                     </v-dialog>
                 <v-dialog v-model="dialog" persistent max-width="600px">
                     <template v-slot:activator="{ on, attrs }">
                         <v-col cols="12" md="3">
                             <v-hover v-slot="{ hover }">
-<<<<<<< HEAD
                                 <v-card class="mx-auto" max-width="344" outlined min-height="100%" color="blue darken-3" :elevation="hover ? 24 : 0" v-bind="attrs" v-on="on">
                                     <v-layout column align-center>
                                         <v-flex class="mt-15 mb-8">
                                             <v-avatar>
                                                 <v-icon color="white" :size="hover ? 60 : 24">mdi-tag-plus</v-icon>
-=======
-                                <v-card class="mx-auto" max-width="344" outlined min-height="100%" color="#1F7087" :elevation="hover ? 24 : 0" v-bind="attrs" v-on="on">
-                                    <v-layout column align-center>
-                                        <v-flex class="mt-15 mb-8">
-                                            <v-avatar>
-                                                <v-icon color="white" :size="hover ? 40 : 24">mdi-tag-plus</v-icon>
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
                                             </v-avatar>
                                         </v-flex>
                                     </v-layout>

@@ -237,11 +237,7 @@
                         v-model.number="i.phone_number"
                         dense
                         outlined
-<<<<<<< HEAD
                         type="string"
-=======
-                        type="number"
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
                         label="电话"
                         prepend-icon="fas fa-mobile-alt"
                         ></v-text-field>
@@ -530,11 +526,7 @@ export default {
       merrage: "",
       living_address: "",
       gender:"",
-<<<<<<< HEAD
       relable_person:[{name:"",relationship:"",phone_number:""}],
-=======
-      relable_person:[{name:"",relationship:"",phone_number:null}],
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
       employments:[{Start_stop_time:"",company:"",job:""}],
       educations:[{school:"",major:"",education_level:"",entrance_year:"",graduation_year:""}],
       selfintro:"",

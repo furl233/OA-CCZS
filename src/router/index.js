@@ -3,11 +3,9 @@ import VueRouter from 'vue-router'
 import Auth from './Auth'
 import SupremeUser from './supremeuser'
 import Administrator from './administrator'
-<<<<<<< HEAD
 import Marketing from './marketing'
 import Finance from './finance.js'
-=======
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
+import Purchase from './purchase.js'
 // import store from '../store'
 
 Vue.use(VueRouter)
@@ -17,11 +15,7 @@ const routes = [
     path: '/',
     name: 'Login',
     redirect: '/signin',
-<<<<<<< HEAD
     component: () => import('@/pages/login/Login.vue'),
-=======
-    component: () => import(/* webpackChunkName: "login" */ '@/pages/login/Login.vue'),
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
     children:[
       ...Auth
     ],
@@ -30,11 +24,7 @@ const routes = [
     path: '/supremeuser',
     name: 'SupremeUser',
     redirect: '/supremeuser/home',
-<<<<<<< HEAD
     component: () => import('@/pages/SupremeUser/User.vue'),
-=======
-    component: () => import(/* webpackChunkName: "login" */ '@/pages/SupremeUser/User.vue'),
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
     children:[
       ...SupremeUser
     ],
@@ -47,7 +37,6 @@ const routes = [
     path: '/administrator',
     name: 'Administrator',
     redirect: '/administrator/home',
-<<<<<<< HEAD
     component: () => import('@/pages/Administrator/User.vue'),
     children:[
       ...Administrator
@@ -70,12 +59,15 @@ const routes = [
     children:[
       ...Finance
     ],
-=======
-    component: () => import(/* webpackChunkName: "login" */ '@/pages/Administrator/User.vue'),
+  },
+  {
+    path: '/purchase',
+    name: 'Purchase',
+    redirect: '/purchase/home',
+    component: () => import('@/pages/Purchase/User.vue'),
     children:[
-      ...Administrator
+      ...Purchase
     ],
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
   }
 ]
 

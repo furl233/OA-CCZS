@@ -4,20 +4,12 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify';
 import VCharts from 'v-charts'
-<<<<<<< HEAD
-=======
-import VueGoogleCharts from 'vue-google-charts'
-
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
 import axios from 'axios'
+import '@/svg/index.js'
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios 
 Vue.use(VCharts)
-<<<<<<< HEAD
-=======
-Vue.use(VueGoogleCharts)
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
 
 
 axios.interceptors.request.use(function(config) {

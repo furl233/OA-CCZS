@@ -4,9 +4,9 @@
       <TopBar></TopBar>
         <v-content >
           <v-layout column class="d-flex flex-column">
-            <v-fade-transition leave-absolute hide-on-leave>
+            <v-scroll-y-transition mode="out-in">
               <router-view></router-view>
-            </v-fade-transition>
+            </v-scroll-y-transition>
           </v-layout>
         </v-content>
   </v-app>

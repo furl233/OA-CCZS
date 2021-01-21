@@ -14,32 +14,21 @@
                         <template v-slot:top>
                           <v-toolbar flat>
                             <v-toolbar-title>操作及查看</v-toolbar-title>
-<<<<<<< HEAD
                             <v-divider class="mx-1" inset vertical></v-divider>
                             <v-spacer></v-spacer>
                             <!-- 编辑人员所有资料或增加单个人员 -->
                             <v-dialog v-model="dialog" fullscreen max-width="290" hide-overlay transition="dialog-bottom-transition">
-=======
-                            <v-divider class="mx-4" inset vertical></v-divider>
-                            <v-spacer></v-spacer>
-                            <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
                               <template v-slot:activator="{ on, attrs }">
                                 <v-btn color="primary" dark class="mb-1 font-weight-black" v-bind="attrs" v-on="on">手动 新增</v-btn>
                               </template>
                               <v-card>
-<<<<<<< HEAD
                                   <v-toolbar dark :color="genderdetermine()">
-=======
-                                  <v-toolbar dark color="indigo">
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
                                     <v-btn icon dark @click.stop="close">
                                       <v-icon>mdi-close</v-icon>
                                     </v-btn>
                                     <v-toolbar-title>设置信息</v-toolbar-title>
                                     <v-spacer></v-spacer>
                                     <v-toolbar-items>
-<<<<<<< HEAD
                                       <v-dialog v-model="dialogsave" persistent max-width="290" transition="dialog-top-transition">
                                         <template v-slot:activator="{ on, attrs }">
                                           <v-btn dark text class="white--text" v-bind="attrs" v-on="on">保存</v-btn>
@@ -91,36 +80,10 @@
                                                     </v-list-item-subtitle>
                                                   </v-list-item-content>
                                                   </v-list-item>
-=======
-                                      <v-btn dark text class="white--text" @click.stop="save">保存</v-btn>
-                                    </v-toolbar-items>
-                                  </v-toolbar>
-                                  <v-list three-line subheader>
-                                    <v-subheader>基础信息</v-subheader>
-                                    <v-list-item>
-                                      <v-list-item-content>
-                                          <v-row dense>
-                                            <v-col cols="12" md="6">
-                                              <v-card color="indigo" dark>
-                                                <div class="d-flex flex-no-wrap justify-left">
-                                                  <v-avatar class="ma-2" size="125" tile>
-                                                      <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
-                                                    </v-avatar>
-                                                  <div>
-                                                    <v-list-item>
-                                                        <v-list-item-content three-line>
-                                                          <v-list-item-title class="text-h4 my-2">姓名</v-list-item-title>
-                                                          <v-list-item-subtitle class="my-2">部门/职位</v-list-item-subtitle>
-                                                          <v-list-item-subtitle class="my-2">任职期N年</v-list-item-subtitle>
-                                                        </v-list-item-content>
-                                                    </v-list-item>
-                                                  </div>
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
                                                 </div>
                                               </v-card>
                                             </v-col>
                                           </v-row>
-<<<<<<< HEAD
                                     <v-divider inset class="my-1"></v-divider>
                                     <v-row dense>
                                       <v-col cols="4" md="4">
@@ -470,46 +433,6 @@
                             </v-dialog>
                             <!-- 删除当前人员 -->
                             <v-dialog v-model="dialogDelete" max-width="500px" persistent>
-=======
-                                      </v-list-item-content>
-                                    </v-list-item>
-                                  </v-list>
-                                  <v-divider></v-divider>
-
-                                  <v-list three-line subheader>
-                                    <v-subheader>General</v-subheader>
-                                    <v-list-item>
-                                      <v-list-item-action>
-                                        <v-checkbox ></v-checkbox>
-                                      </v-list-item-action>
-                                      <v-list-item-content>
-                                        <v-list-item-title>Notifications</v-list-item-title>
-                                        <v-list-item-subtitle>Notify me about updates to apps or games that I downloaded</v-list-item-subtitle>
-                                      </v-list-item-content>
-                                    </v-list-item>
-                                    <v-list-item>
-                                      <v-list-item-action>
-                                        <v-checkbox ></v-checkbox>
-                                      </v-list-item-action>
-                                      <v-list-item-content>
-                                        <v-list-item-title>Sound</v-list-item-title>
-                                        <v-list-item-subtitle>Auto-update apps at any time. Data charges may apply</v-list-item-subtitle>
-                                      </v-list-item-content>
-                                    </v-list-item>
-                                    <v-list-item>
-                                      <v-list-item-action>
-                                        <v-checkbox ></v-checkbox>
-                                      </v-list-item-action>
-                                      <v-list-item-content>
-                                        <v-list-item-title>Auto-add widgets</v-list-item-title>
-                                        <v-list-item-subtitle>Automatically add home screen widgets</v-list-item-subtitle>
-                                      </v-list-item-content>
-                                    </v-list-item>
-                                  </v-list>
-                              </v-card>
-                            </v-dialog>
-                            <v-dialog v-model="dialogDelete" max-width="500px">
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
                               <v-card color="deep-purple accent-3">
                                 <v-app-bar color="deep-purple accent-4">
                                   <v-icon class="mr-5 yellow--text">mdi-alert-outline</v-icon>
@@ -525,7 +448,6 @@
                                   <br>并修改目标用户密码防止陌生人使用</v-card-text>
                                 <v-card-actions>
                                   <v-spacer></v-spacer>
-<<<<<<< HEAD
                                   <v-btn color="white" :loading='btnloading' outlined @click.stop="closeDelete">取消</v-btn>
                                   <v-btn color="white" :loading='btnloading' outlined @click.stop="deleteItemConfirm">确认</v-btn>
                                   <v-spacer></v-spacer>
@@ -715,46 +637,31 @@
                                 <v-card-actions>
                                   <v-spacer></v-spacer>
                                   <v-btn color="white" class="font-weight-bold" @click.stop="closeView">关闭</v-btn>
-=======
-                                  <v-btn color="white" outlined @click="closeDelete">取消</v-btn>
-                                  <v-btn color="white" outlined @click="deleteItemConfirm">确认</v-btn>
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
                                   <v-spacer></v-spacer>
                                 </v-card-actions>
                               </v-card>
                             </v-dialog>
                           </v-toolbar>
                         </template>
-<<<<<<< HEAD
                         <template v-slot:[`item.view`]="{ item }">
                           <v-icon @click.stop="view(item)">mdi-eye-circle</v-icon>
                         </template>
                         <template v-slot:[`item.option`]="{ item }">
                           <v-icon small class="mr-2" @click.stop="editItem(item)">mdi-pencil</v-icon>
-=======
-                        <template v-slot:[`item.option`]="{ item }">
-                          <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
                           <v-icon small @click.stop="deleteItem(item)">mdi-delete</v-icon>
                         </template>
                         </v-data-table>
                     </v-card>
                 </v-col>
-<<<<<<< HEAD
                 <Snap-bar :snacker='snacker'></Snap-bar>
-=======
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
             </v-row>
          </v-container>
     </v-app>
 </template>
 
 <script>
-<<<<<<< HEAD
 import SnapBar from '@/components/SnapBar.vue';
 import { states, folk } from "@/assets/china/provience.js";
-=======
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
 export default {
     props:{employees:Array},
     name: 'Humansource',
@@ -762,7 +669,6 @@ export default {
       return{
         profiles:this.employees,
         search: '',
-<<<<<<< HEAD
         img:{avatarimg:null,id_img:null},
         selectitem:{department:['市场部','行政部','投标部','财务部','质安部','工程部','总经办','待定'],merrage:['已婚','未婚'],
                     gender:["男","女"],station:['挂靠社保人员','登记员','员工','经理','副总','办公室主任','总裁','董事长','董事','待业']},
@@ -797,15 +703,6 @@ export default {
         headers: [
           { text: '查看员工卡', value:'view', sortable: false, align:'center'},
           { text: '员工姓名', value: 'username'},
-=======
-        dialog: false,
-        dialogDelete: false,
-        editedIndex: -1,
-        editedItem:{username:'',department:'',station:'',hiredate:'',firedate:'',gender:'',telephone:'',email:'',},
-        defaultItem:{username:'',department:'',station:'',hiredate:'',firedate:'',gender:'',telephone:'',email:'',},
-        headers: [
-          { text: '员工姓名', align: 'start', sortable: false, value: 'username'},
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
           { text: '所属部门', value: 'department' },
           { text: '部门岗位', value: 'station' },
           { text: '入职时间', value: 'hiredate' },
@@ -817,7 +714,6 @@ export default {
         ]
       }
     },
-<<<<<<< HEAD
 
     components:{
         SnapBar
@@ -840,13 +736,6 @@ export default {
       editItem (item) {
         this.editedIndex = this.profiles.indexOf(item)
         this.editedItem = Object.assign({}, item)
-=======
-    methods:{
-      editItem (item) {
-        this.editedIndex = this.profiles.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        console.log(this.editedItem)
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
         this.dialog = true
       },
 
@@ -856,7 +745,6 @@ export default {
         this.dialogDelete = true
       },
 
-<<<<<<< HEAD
       async deleteItemConfirm () {
         this.btnloading = true
         await this.$http.delete(`http://localhost:3000/users/${this.editedItem._id}`)
@@ -867,16 +755,11 @@ export default {
                     if(err.status == 401){this.switch_snap(true,"非行政登记人员或主任不可操作","red")}
                     else{this.switch_snap(true,"删除失败,请重试","red")}})
         // this.profiles.splice(this.editedIndex, 1)
-=======
-      deleteItemConfirm () {
-        this.profiles.splice(this.editedIndex, 1)
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
         this.closeDelete()
       },
 
       close () {
         this.dialog = false
-<<<<<<< HEAD
         this.dialogsave = false
         this.btnloading = false
         this.$nextTick(() => {
@@ -889,8 +772,6 @@ export default {
 
       closeView () {
         this.dialogView = false
-=======
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
         this.$nextTick(() => {
           this.editedItem = Object.assign({}, this.defaultItem)
           this.editedIndex = -1
@@ -899,17 +780,13 @@ export default {
 
       closeDelete () {
         this.dialogDelete = false
-<<<<<<< HEAD
         this.btnloading = false
-=======
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
         this.$nextTick(() => {
           this.editedItem = Object.assign({}, this.defaultItem)
           this.editedIndex = -1
         })
       },
 
-<<<<<<< HEAD
       async save () {
         this.btnloading = true
         this.upload()
@@ -936,18 +813,10 @@ export default {
                       this.switch_snap(true,"添加成功","green")})
           .catch(err => {this.switch_snap(true,"添加失败,请重试","red"),console.log(err)})
           // this.profiles.push(this.editedItem)
-=======
-      save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.profiles[this.editedIndex], this.editedItem)
-        } else {
-          this.profiles.push(this.editedItem)
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
         }
         this.close()
       },
 
-<<<<<<< HEAD
       //修改表单中的增加表单输入,修改edititem的数组长度用于增加表单
       Addrelable_person(){
         let newperson = {phone_number:'',relationship:'',name:''}
@@ -1028,9 +897,6 @@ export default {
         },
     },
 
-=======
-    },
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
     watch: {
       dialog (val) {
         val || this.close()
@@ -1038,15 +904,9 @@ export default {
       dialogDelete (val) {
         val || this.closeDelete()
       },
-<<<<<<< HEAD
       propfiles (val) {
         val || this.$forceUpdate()
       },
     },
 }
 </script>
-=======
-    },
-}
-</script>
->>>>>>> 0052218504708c33ecd611734c095f0d71514235
