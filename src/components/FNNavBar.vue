@@ -52,9 +52,9 @@ export default {
         links:[
             {icon:'fas fa-home',text:'主页',route:'/finance/home'},
             {icon:'fa fa-money-check-alt',text:'账户管理',route:'/finance/account'},
-            {icon:'fas fa-table',text:'项目明细卡',route:'/finance/detail_card'},
+            {icon:'fas fa-table',text:'项目明细卡',route:'/finance/fund'},
             {icon:'fas fa-handshake',text:'劳务供应商',route:'/finance/labour_service'},
-            {icon:'fas fa-hard-hat',text:'劳务合同',route:'/finance/labour_contract'},
+            {icon:'fas fa-file',text:'劳务合同',route:'/finance/labour_contract'},
         ],
         slides:[
             '申报2020年优秀项目经理',

@@ -3,7 +3,7 @@ export function login(){
         if((this.usernameErrors).length == 0  && (this.passwordErrors).length == 0){
             this.isload = true
             console.log(this.isload)
-            this.$http.post('http://192.168.50.132:3000/users/login',{
+            this.$http.post('http://localhost:3000/users/login',{
                 "username":this.username,
                 "password":this.password,
             }).then(res=> {

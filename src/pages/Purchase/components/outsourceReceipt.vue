@@ -1,16 +1,18 @@
 <template>
-    <v-app class="blue accent-2 rounded-lg pa-3">
+    <v-app class="blue accent-2 rounded-lg">
+        <v-container>
             <v-row dense>
                 <v-col cols="12" md="12">
                     <UnexpectedPage></UnexpectedPage>
                 </v-col>
             </v-row>
+        </v-container>
     </v-app>
 </template>
 <script>
 import UnexpectedPage from '@/components/erropage/UnexpectedPage.vue'
 export default {
-     name: 'Home',
+     name: 'Outsource',
      components:{
         UnexpectedPage
     },
@@ -61,10 +63,10 @@ export default {
         },
 
         save () {
-        console.log(this.editedItem)
-        if (this.editedIndex > -1) {
+            console.log(this.editedItem)
+            if (this.editedIndex > -1) {
             Object.assign(this.profiles[this.editedIndex], this.editedItem)
-        } else {
+            } else {
             this.profiles.push(this.editedItem)
             }
             this.close()

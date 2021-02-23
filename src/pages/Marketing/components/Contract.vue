@@ -1,6 +1,5 @@
 <template>
-    <v-app class="blue accent-2 rounded-lg">
-        <v-container>
+    <v-app class="blue accent-2 rounded-lg pa-3">
             <v-row dense>
                 <v-col cols="12" md="12">
                     <v-card dense color="white" min-height="700">
@@ -50,13 +49,13 @@
                                               </v-col>
                                               </v-row>
                                               <v-divider></v-divider>
-                                              <v-card-subtitle>扣款协议:</v-card-subtitle>
+                                              <v-card-subtitle>扣款协议:(输入小数而不是百分数,例:0.09*)</v-card-subtitle>
                                                 <v-row>
                                               <v-col cols="12" md="4">
-                                                  <v-text-field dense label="合同金额" outlined prepend-icon="mdi-wallet" type="number" v-model="editedItem.construction_cost"></v-text-field>
+                                                  <v-text-field dense label="合同金额" prefix="$" outlined prepend-icon="mdi-wallet" type="number" v-model="editedItem.construction_cost"></v-text-field>
                                               </v-col>
                                               <v-col cols="12" md="4">
-                                                  <v-text-field dense label="发票额度" outlined prepend-icon="mdi-percent" type="number" v-model="editedItem.tax_rate"></v-text-field>
+                                                  <v-text-field dense label="销项税率" outlined prepend-icon="mdi-percent" type="number" v-model="editedItem.tax_rate"></v-text-field>
                                               </v-col>
                                               <v-col cols="12" md="4">
                                                   <v-text-field dense label="管理费" outlined prepend-icon="mdi-percent" type="number" v-model="editedItem.Management_fee"></v-text-field>
@@ -91,18 +90,18 @@
                                                     solo></v-autocomplete>
                                               </v-col>
                                               <v-col cols="6" md="6">
-                                                  <v-autocomplete v-if="editedItem.contract_performance == '联营'" dense :items="copartner" hint="合作人选择" label="合作人选择"  v-model="editedItem.registrar"
-                                                    solo></v-autocomplete>
+                                                  <v-autocomplete v-if="editedItem.contract_performance == '联营'" return-object dense item-text="name" item-value="name" :items="copartner" hint="合作人选择" label="合作人选择"  v-model="select.copartner"
+                                                    solo :search-input.sync="search_temp.copartner"></v-autocomplete>
                                               </v-col>
                                               <v-col cols="6" md="6">
                                                   <v-autocomplete v-if="editedItem.contract_performance == '联营'" dense :items="participants" hint="企业联系人" label="企业联系人"  v-model="editedItem.contact_person"
                                                     solo></v-autocomplete>
                                               </v-col>
                                               <v-col cols="12" md="5">
-                                                  <v-text-field dense label="占地面积" outlined prepend-icon="mdi-floor-plan" type="number" v-model="editedItem.floor_area"></v-text-field>
+                                                  <v-text-field dense label="占地面积" suffix="m²" outlined prepend-icon="mdi-floor-plan" type="number" v-model="editedItem.floor_area"></v-text-field>
                                               </v-col>
                                               <v-col cols="12" md="5">
-                                                  <v-text-field dense label="建筑高度" outlined prepend-icon="fa-building" type="number" v-model="editedItem.height"></v-text-field>
+                                                  <v-text-field dense label="建筑高度" suffix="m" outlined prepend-icon="fa-building" type="number" v-model="editedItem.height"></v-text-field>
                                               </v-col>
                                               <v-col cols="6" md="5">
                                                   <v-text-field dense label="功能类别" outlined prepend-icon="fa-certificate" v-model="editedItem.functional_category"></v-text-field>
@@ -121,12 +120,12 @@
                                                   <v-btn class="ml-2" @click="addhumansources">增加</v-btn>
                                                   <v-btn class="ml-2" @click="delhumansources">删除</v-btn>
                                               </v-card-subtitle>
-                                            <v-row v-for="(item,index) in editedItem.humansources" :key="index"> 
-                                                <v-col cols=7 md="8">
+                                            <v-row v-for="(item,index) in editedItem.humansources" :key="index" dense> 
+                                                <v-col cols=7 md="8" dense>
                                                 <v-autocomplete dense :items="work_name" label="参建工种" prepend-icon="mdi-account" v-model="item.position"
                                                     solo></v-autocomplete>
                                               </v-col>
-                                              <v-col cols=5 md="4">
+                                              <v-col cols=5 md="4" dense>
                                                 <v-autocomplete dense :items="certificate" label="参建人员"  v-model="item.person"
                                                     solo></v-autocomplete>
                                               </v-col>
@@ -167,18 +166,16 @@
                                     </v-dialog>
                                 </v-toolbar>
                             </template>
-                            <template v-slot:[`item.actions`]="{ item }">
-                                <v-icon small class="mr-2"  @click="editItem(item)">mdi-pencil</v-icon>
-                                <v-icon  small  @click="deleteItem(item)">mdi-delete</v-icon>
+                            <template v-slot:[`item.edit`]="{ item }">
+                                <v-btn class="white--text" small @click="editItem(item)" :loading='dataloading' color="primary">修改<v-icon right dark>mdi-pencil</v-icon></v-btn>     
                             </template>
-                            <template v-slot:[`item.officalWeb`]="{ item }">
-                              <a :href="item.officalWeb" target="_blank" dark>{{ item.officalWeb }}</a>
+                            <template v-slot:[`item.delete`]="{ item }">
+                                <v-btn class="white--text" small @click="deleteItem(item)" :loading='dataloading' color="red">删除<v-icon right dark>mdi-delete</v-icon></v-btn>
                             </template>
                         </v-data-table>
                     </v-card>
                 </v-col>
             </v-row>
-        </v-container>
     </v-app>
 </template>
 <script>
@@ -187,7 +184,7 @@ export default {
      name: 'Co_partner',
      data(){
         return{
-            work_name,
+            work_name,axioscount:0,
             dataloading:true,
             dialog : false, 
             dialogDelete: false,
@@ -197,9 +194,10 @@ export default {
             certificate:[],
             copartner:[],
             
-            search_temp:'',
             search:'',
             profiles: [],
+            select:{copartner:{}},
+            search_temp:{copartner:''},
             editedIndex: -1,
             editedItem: {humansources:[{person:'',position:''}],},
             defaultItem: {humansources:[{person:'',position:''}],},
@@ -210,7 +208,8 @@ export default {
                     { text: '工程所在地', value: 'locations' },
                     { text: '工程类型', value: 'classification',sortable: false, },
                     { text: '合同编号', value: 'contract_code',sortable: false, },
-                    { text: '修改/删除', value: 'actions', sortable: false },
+                    { text: '', value: 'edit', sortable: false},
+                    { text: '', value: 'delete', sortable: false},
                     ],
         }
     },
@@ -277,7 +276,7 @@ export default {
         },
 
         initialize () {
-             this.$http.get(`http://localhost:3000/marketingcontract?per_page=1000&page=1&keyword=`)
+            this.$http.get(`http://localhost:3000/marketingcontract?per_page=1000&page=1&keyword=`)
                 .then(res=> {this.profiles = res.data.contractlist
                             for (var i=0; i < this.profiles.length ; ++i){
                                 delete this.profiles[i].createdAt
@@ -301,12 +300,18 @@ export default {
             console.log(err)     
           })
         },
-        getCopatner(){
-            this.$http.get(`http://localhost:3000/copartner?per_page=10&page=1&keyword=`)
-                .then(res=> {let list = res.data.copartnerlist 
-                    for (var i=0; i < list.length ; ++i){
-                    this.copartner.push(list[i]["name"]);
-                    }
+        getCopartner(val){
+            let seqNumber = ++this.axioscount;
+            this.$http.get(`http://localhost:3000/copartner?per_page=10&page=1&keyword=${val}`)
+                .then(res=> {
+                    if (seqNumber === this.axioscount) {
+                        this.copartner = res.data.copartnerlist 
+                        for (var i=0; i < this.registrar.length ; ++i){
+                            delete this.copartner[i].createdAt
+                            delete this.copartner[i].updatedAt
+                        }
+                        
+                    } 
             })
             .catch(err => {console.log(err) })
         },
@@ -333,13 +338,17 @@ export default {
     },
     created(){
       this.initialize()
-      this.getCopatner()
+      this.getCopartner()
       this.getemployee()
       this.getcertificate()
     },
     watch: {
-        search_temp(val) {
-        this.text = val;
+        'search_temp.copartner'(val) {
+            this.getCopartner(val)
+        },
+        'select.copartner'(val){
+            this.editedItem.registrar = val.name
+            this.editedItem.registrarID = val._id
         },
     },
       

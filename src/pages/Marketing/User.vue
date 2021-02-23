@@ -2,7 +2,7 @@
   <v-app>
       <MKNavbar></MKNavbar>
       <TopBar></TopBar>
-        <v-content >
+        <v-content>
           <v-layout column class="d-flex flex-column blue accent-2">
             <v-scroll-y-transition mode="out-in">
               <keep-alive>

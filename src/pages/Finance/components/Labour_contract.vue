@@ -1,6 +1,5 @@
 <template>
-    <v-app class="blue accent-2 rounded-lg">
-        <v-container>
+    <v-app class="blue accent-2 rounded-lg pa-3">
             <v-row dense>
                 <v-col cols="12" md="12"> 
                     <v-card dense color="white" min-height="700">
@@ -16,13 +15,13 @@
                                     <v-spacer></v-spacer>
                                     <v-dialog v-model="dialog" max-width="600px" persistent scrollable>
                                     <template v-slot:activator="{ on, attrs }">
-                                        <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">新增劳务合同</v-btn>
+                                        <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on" :loading='dataloading'>新增劳务合同</v-btn>
                                     </template>
                                     <v-card>
                                         <v-app-bar color="indigo">
                                             <v-toolbar-title class="white--text">{{formTitle}}</v-toolbar-title>
                                             <v-spacer></v-spacer>
-                                            <v-btn icon @click.stop="close" dark>
+                                            <v-btn icon @click.stop="close" dark :disabled='dataloading'>
                                                 <v-icon>mdi-close-box</v-icon>
                                             </v-btn>
                                         </v-app-bar>
@@ -62,7 +61,7 @@
                                                    <v-text-field dense label="劳务金额" type="number" hint="劳务金额" outlined prepend-icon="mdi-bank" v-model="editedItem.total_amount"></v-text-field>
                                               </v-col>
                                               <v-col cols="12" md="4">
-                                                   <v-text-field dense disabled label="占合同比率" hint="占合同比率" outlined prepend-icon="mdi-bank" v-model="editedItem.rate"></v-text-field>
+                                                   <v-text-field dense disabled label="占合同比率" type="number" hint="占合同比率" outlined prepend-icon="mdi-percent" v-model="editedItem.rate"></v-text-field>
                                               </v-col>
                                               <v-col cols="12" md="6">
                                                   <v-text-field dense label="采购日期" type="date" outlined prepend-icon="mdi-account" v-model="editedItem.purchase_order_date"></v-text-field>
@@ -73,9 +72,9 @@
                                             </v-row>
                                             <v-divider></v-divider>
                                                 <div v-if="editedIndex > -1">
-                                                    <v-card-subtitle>上传文件:
+                                                    <v-card-subtitle>上传附件:
                                                         <input type="file" ref="inputFile" style="display:none" @change="UploadFiles($event)" multiple="multiple">
-                                                            <v-btn color="indigo white--text" class="ml-6"  @click="fileinput">Upload
+                                                            <v-btn color="indigo white--text" class="ml-6"  @click="fileinput" :loading='dataloading'>Upload
                                                                 <v-icon right dark>mdi-cloud-upload</v-icon>
                                                             </v-btn>
                                                     </v-card-subtitle>
@@ -137,16 +136,16 @@
                                 </v-toolbar>
                             </template>
                              <template v-slot:[`item.actions`]="{ item }">
-                                <v-icon small class="mr-2"  @click="editItem(item)">mdi-pencil</v-icon>
+                                <v-btn class="white--text" small @click="editItem(item)" color="primary">修改<v-icon right dark>mdi-pencil</v-icon></v-btn>
                             </template>
-                             <template v-slot:[`item.datalog`]="{ item }">
-                                <v-icon small class="mr-2"  @click="LogData(item)">mdi-clipboard-list</v-icon>
+                             <template v-slot:[`item.datalog`]="{ item }">                                                                
+                                <v-btn class="white--text" small @click="LogData(item)" color="blue-grey">发票<v-icon right dark>mdi-clipboard-list</v-icon></v-btn>
                             </template>
                         </v-data-table>
                     </v-card>
                 </v-col>
             </v-row>
-        </v-container>
+        
     </v-app>
 </template>
 <script>
@@ -180,11 +179,12 @@ export default {
                     { text: '供应商名称', value: 'supplier_name', sortable: false,},
                     { text: '项目经理', value: 'copartner_name'},
                     { text: '合同编号', value: 'contract_code',sortable: false},
-                    { text: '合同总额(含税)', value: 'total_amount'},
-                    { text: '返回进项总额', value: 'tax_amount'},
+                    { text: '劳务合同总额(含税)', value: 'total_amount'},
+                    {text: '付款总额', value: 'fund_settlement'},
+                    { text: '返回发票总额', value: 'receipt_amount'},
                     { text: '占工程总额比率', value: 'rate'},
-                    { text: '录入发票', value: 'datalog', sortable: false},
-                    { text: '修改', value: 'actions', sortable: false}
+                    { text: '发票收取', value: 'datalog', sortable: false,align: 'center'},
+                    { text: '', value: 'actions', sortable: false}
                     ],
         }
 
@@ -196,6 +196,7 @@ export default {
         },
 
         editItem (item) {
+            console.log(this.editedItem)
         this.editedIndex = this.profiles.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
@@ -225,6 +226,7 @@ export default {
 
         //index为-1则上传,不为则修改
         async save () {
+            console.log("this.editedItem"+this.editedItem)
             this.btnloading = true
             if (this.editedIndex > -1) {
             let id = this.editedItem._id
@@ -233,7 +235,7 @@ export default {
                 .then(res=> {Object.assign(this.profiles[this.editedIndex], this.editedItem),console.log(res.data)})
                 .catch(err => {console.log(err)})
             } else {
-                this.editedItem.tax_amount = 0
+                this.editedItem.receipt_amount = 0
                 await this.$http.post(`http://localhost:3000/purchase`,this.editedItem)
                 .then(res=> {this.editedItem._id=res.data._id;this.profiles.push(this.editedItem)})
                 .catch(err => {console.log(err)})
@@ -318,12 +320,12 @@ export default {
             for( var i = 0; i < this.$refs.inputFile.files.length; i++ ){
                 let file = this.$refs.inputFile.files[i];
                 formData.append('file', file);
-            }
-            await this.$http.post(`http://localhost:3000/upload/multiplefilesTopath?department=财务部&category=供应商&subcategory=${this.editedItem.supplier_name}`,formData,
+            }                                                                                                       
+            await this.$http.post(`http://localhost:3000/upload/multiplefilesTopath?keyword=财务部/供应商/${this.editedItem.supplier_name}/供应商合同`,formData,
                 {headers: {'Content-Type': 'multipart/form-data'},})
                 .then(res => {document = res.data.filelist,console.log(document)})
                 .catch(err => {console.log(err)})
-            await this.$http.post(`http://localhost:3000/supplies/${this.editedItem._id}/document`,{"document":document})
+            await this.$http.post(`http://localhost:3000/purchase/${this.editedItem._id}/document`,{"document":document})
             .then(res =>{console.log(res);this.profiles[this.editedIndex].document.push(...document)})
             .catch(err =>{console.log(err)})
         },
@@ -352,12 +354,14 @@ export default {
         },
         'select.enginerContract'(val){
             console.log(val)
-            this.editedItem.belongsTocopartner = val.registrarID
+            // this.editedItem.belongsTocopartner = val.registrarID
             this.editedItem.contract_name = val.name
             this.editedItem.contract = val._id
             this.editedItem.construction_cost = val.construction_cost
             this.editedItem.copartner_name = val.registrar
+            this.editedItem.belongsTocopartner = val.registrarID
             this.editedItem.contract_code = val.contract_code
+
         },
         'select.suppliers'(val){
             this.editedItem.supplier_name = val.supplier_name
@@ -365,6 +369,9 @@ export default {
         },
         'editedItem.total_amount'(val){
             this.editedItem.rate = (val/this.editedItem.construction_cost).toFixed(2)
+            this.editedItem.rate = parseFloat(this.editedItem.rate)
+            this.editedItem.total_amount = parseFloat(this.editedItem.total_amount)
+            console.log(this.editedItem)
         }
     }
 }

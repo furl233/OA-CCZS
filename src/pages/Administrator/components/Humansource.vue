@@ -17,7 +17,7 @@
                             <v-divider class="mx-1" inset vertical></v-divider>
                             <v-spacer></v-spacer>
                             <!-- 编辑人员所有资料或增加单个人员 -->
-                            <v-dialog v-model="dialog" fullscreen max-width="290" hide-overlay transition="dialog-bottom-transition">
+                            <v-dialog v-model="dialog" width="600" hide-overlay transition="dialog-bottom-transition">
                               <template v-slot:activator="{ on, attrs }">
                                 <v-btn color="primary" dark class="mb-1 font-weight-black" v-bind="attrs" v-on="on">手动 新增</v-btn>
                               </template>
@@ -48,9 +48,10 @@
                                       </v-dialog>
                                     </v-toolbar-items>
                                   </v-toolbar>
+                                  <v-container>
                                     <v-subheader>基础信息</v-subheader>
                                           <v-row dense>
-                                            <v-col cols="11" md="11" class="mx-2">
+                                            <v-col cols="11" md="12" class="ml-4">
                                               <v-card :color="genderdetermine()" dark>
                                                 <div class="d-flex flex-no-wrap justify-left">
                                                   <v-card class="ma-3" height="160" width="160" tile color="#1F7087" :img="editedItem.avatar_url == ''?'https://cdn.vuetifyjs.com/images/cards/server-room.jpg' : editedItem.avatar_url" >
@@ -210,26 +211,26 @@
                                             </template>
                                           <v-list-item>
                                             <v-row dense>
-                                              <v-col cols="10" md="2">
+                                              <v-col cols="10" md="6">
                                                   <v-text-field outlined required label="入学时间" 
                                                   type='date' prepend-icon="mdi-calendar" dense
                                                   v-model="i.entrance_year"></v-text-field>
                                               </v-col>
-                                              <v-col cols="10" md="2">
+                                              <v-col cols="10" md="6">
                                                   <v-text-field outlined required label="毕业时间" 
                                                   type='date' prepend-icon="mdi-calendar" dense
                                                   v-model="i.graduation_year"></v-text-field>
                                               </v-col>
-                                              <v-col cols="4" md="2">
+                                              <v-col cols="4" md="4">
                                               <v-text-field outlined label="教育程度" dense
                                               v-model="i.education_level"  prepend-icon="fa-building"></v-text-field>
                                               </v-col>
-                                              <v-col cols="4" md="2">
+                                              <v-col cols="4" md="4">
                                               <v-text-field outlined label="专业" dense
                                                v-model="i.major" 
                                               prepend-icon="fa-account-sitemap"></v-text-field>
                                               </v-col>
-                                              <v-col cols="4" md="2">
+                                              <v-col cols="4" md="4">
                                               <v-text-field outlined label="学校" dense
                                                v-model="i.school" 
                                               prepend-icon="fa-account-sitemap"></v-text-field>
@@ -253,17 +254,17 @@
                                           </template>
                                           <v-list-item v-for="(i,index) in editedItem.relable_person" :key="index">
                                           <v-row dense >
-                                              <v-col cols="4" md="3">
+                                              <v-col cols="4" md="4">
                                                 <v-text-field label="名字" prepend-icon="mdi-account"
                                                 v-model="i.name" 
                                                  outlined dense class="ma-1"></v-text-field>
                                               </v-col>
-                                              <v-col cols="4" md="3">
+                                              <v-col cols="4" md="4">
                                                 <v-text-field label="关系" prepend-icon="fas fa-user-friends"
                                                 v-model="i.relationship" 
                                                  outlined dense class="ma-1"></v-text-field>
                                               </v-col>
-                                              <v-col cols="4" md="3">
+                                              <v-col cols="4" md="4">
                                                 <v-text-field label="电话" prepend-icon="fas fa-mobile-alt"
                                                 v-model="i.phone_number" 
                                                  outlined dense class="ma-1"></v-text-field>
@@ -278,6 +279,7 @@
                                           </div>
                                         </v-list-group>
                                     </v-list>
+                                    </v-container>
                                   <v-divider></v-divider>
                                   <!-- 下半部分 -->
                                   <v-card :color="genderdetermine()">
@@ -295,15 +297,15 @@
                                             </template>
                                               <v-list-item>
                                                 <v-row dense>
-                                                    <v-col cols="7" md="3">
+                                                    <v-col cols="7" md="5">
                                                       <v-text-field label="开始时间" type="date" v-model="item.start_time"
                                                       outlined dense class="ma-1"></v-text-field>
                                                     </v-col>
-                                                    <v-col cols="7" md="3">
+                                                    <v-col cols="7" md="5">
                                                       <v-text-field label="结束时间" type="date" v-model="item.stop_time"
                                                       outlined dense class="ma-1"></v-text-field>
                                                     </v-col>
-                                                    <v-col cols="12" md="3">
+                                                    <v-col cols="12" md="2">
                                                       <v-file-input small-chips multiple counter dense outlined
                                                       label="上传合同pdf文件" accept='.pdf'></v-file-input>
                                                     </v-col>
@@ -331,11 +333,11 @@
                                             </template>
                                             <v-list-item>
                                               <v-row dense>
-                                                <v-col cols="6" md="3">
+                                                <v-col cols="6" md="6">
                                                   <v-text-field prepend-icon="fa-portrait" label="社保账号" v-model="editedItem.social_insurance_idnum"
                                                    outlined dense class="ma-1" ></v-text-field>
                                                 </v-col>
-                                                <v-col cols="6" md="3">
+                                                <v-col cols="6" md="6">
                                                   <v-text-field prepend-icon="fa-money-bill" label="社保金额" v-model="editedItem.social_insurance_amount"
                                                    outlined dense class="ma-1" type="number"></v-text-field>
                                                 </v-col>
@@ -350,11 +352,11 @@
                                             </template>
                                             <v-list-item> 
                                               <v-row dense>
-                                              <v-col cols="6" md="3">
+                                              <v-col cols="6" md="6">
                                                 <v-text-field prepend-icon="fa-portrait" label="公积金账号" v-model="editedItem.accumulation_fund_idnum"
                                                  outlined dense class="ma-1" ></v-text-field>
                                               </v-col>
-                                              <v-col cols="6" md="3">
+                                              <v-col cols="6" md="6">
                                                 <v-text-field prepend-icon="fa-money-bill" label="公积金金额" v-model="editedItem.accumulation_fund_amount"
                                                  outlined dense class="ma-1" type="number"></v-text-field>
                                               </v-col>
@@ -369,11 +371,11 @@
                                             </template>
                                             <v-list-item>
                                             <v-row dense>
-                                              <v-col cols="12" md="3">
+                                              <v-col cols="12" md="6">
                                                 <v-text-field prepend-icon="fa-calendar" label="试用期日期" v-model="editedItem.probation_date"
                                                 outlined dense class="ma-1" type="date"></v-text-field>
                                               </v-col>
-                                              <v-col cols="12" md="3">
+                                              <v-col cols="12" md="6">
                                                 <v-text-field prepend-icon="fa-money-bill" label="试用期工资" v-model="editedItem.probation_salary"
                                                  outlined dense class="ma-1" type="number"></v-text-field>
                                               </v-col>
@@ -381,11 +383,11 @@
                                             </v-list-item>
                                             <v-list-item>
                                             <v-row dense>
-                                              <v-col cols="12" md="3">
+                                              <v-col cols="12" md="6">
                                                 <v-text-field prepend-icon="fa-calendar" label="转正日期" v-model="editedItem.regular_date"
                                                 outlined dense class="ma-1" type="date"></v-text-field>
                                               </v-col>
-                                              <v-col cols="12" md="3">
+                                              <v-col cols="12" md="6">
                                                 <v-text-field prepend-icon="fa-money-bill" label="转正工资" v-model="editedItem.regular_salary"
                                                 outlined dense class="ma-1" type="number"></v-text-field>
                                               </v-col>
@@ -406,10 +408,10 @@
                                           </v-list-item>
                                           <v-list-item>
                                             <v-row dense class="justify-space-around">
-                                              <v-col cols="8" md="3">
+                                              <v-col cols="8" md="6">
                                                 <v-text-field prepend-icon="mdi-calendar" label="入职时间" v-model="editedItem.hiredate" type="date"></v-text-field>
                                               </v-col>
-                                              <v-col cols="8" md="3">
+                                              <v-col cols="8" md="6">
                                                 <v-text-field v-if="editedItem.currentstate =='离职'" prepend-icon="mdi-calendar" label="离职时间" v-model="editedItem.hiredate" type="date"></v-text-field>
                                               </v-col>
                                             </v-row>                   
@@ -429,6 +431,7 @@
                                         </v-list-item>
                                       </v-list>
                                   </v-card>
+                                  
                               </v-card>
                             </v-dialog>
                             <!-- 删除当前人员 -->

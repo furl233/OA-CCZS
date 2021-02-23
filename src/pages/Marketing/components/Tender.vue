@@ -1,6 +1,5 @@
 <template>
-    <v-app class="blue accent-2 rounded-lg">
-        <v-container>
+    <v-app class="blue accent-2 rounded-lg pa-3">
             <v-row dense>
                 <v-col cols="12" md="12">
                     <v-card dense color="white" min-height="700">
@@ -58,7 +57,6 @@
                     </v-card>
                 </v-col>
             </v-row>
-        </v-container>
     </v-app>
 </template>
 <script>

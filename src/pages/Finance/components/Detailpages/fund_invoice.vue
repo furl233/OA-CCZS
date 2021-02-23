@@ -2,7 +2,7 @@
   <div class="w-full">
     <div class="d-flex py-3 ml-4 mt-4">
         <div>
-            <div class="display-1">发票管理</div>
+            <div class="display-1">开票管理</div>
             <v-breadcrumbs :items="breadcrumbs" large class="pa-0 py-2"></v-breadcrumbs>
         </div>
     </div>
@@ -32,46 +32,51 @@
                           </v-app-bar>
                           <v-card-text>
                             <div class="ma-3"> 
-                              <v-card-subtitle>相关信息:</v-card-subtitle>
+                              <v-card-subtitle>工程信息:</v-card-subtitle>
                                 <v-row dense>
                                 <v-col cols="12" md="12">
-                                    <v-text-field disabled dense label="供应商名称" outlined prepend-icon="mdi-account" v-model="editedItem.supplier_name"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" md="12">
-                                    <v-text-field disabled dense label="合同名称" outlined prepend-icon="mdi-account" v-model="editedItem.contract_name"></v-text-field>
+                                    <v-text-field disabled dense label="项目名称" outlined prepend-icon="mdi-account" v-model="fund.contract_name"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" md="6">
-                                    <v-text-field disabled dense label="合同代码" outlined prepend-icon="mdi-account" v-model="editedItem.contract_code"></v-text-field>
+                                    <v-text-field disabled dense label="工程负责人" outlined prepend-icon="mdi-account" v-model="fund.copartner_name"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" md="6">
+                                    <v-text-field disabled dense label="合同编号" outlined prepend-icon="mdi-account" v-model="fund.contract_code"></v-text-field>
                                 </v-col>
                                 </v-row>
                                 <v-divider></v-divider>
                               <v-card-subtitle>发票信息:</v-card-subtitle>
                               <v-row dense>
-                                <v-col cols="12" md="6">
-                                    <v-text-field dense label="收票日期" type="date" outlined prepend-icon="mdi-calendar-blank" v-model="editedItem.delivery_date"></v-text-field>
+                                  <v-col cols="12" md="12">
+                                    <v-text-field dense label="审批编号" outlined prepend-icon="mdi-barcode" v-model="editedItem.Approval_code"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" md="12">
+                                    <v-text-field dense label="发票抬头" outlined prepend-icon="mdi-tournament" v-model="editedItem.invoice_title"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" md="6">
-                                    <v-text-field dense label="开票日期" type="date" outlined prepend-icon="mdi-calendar-blank" v-model="editedItem.receipt_date"></v-text-field>
+                                    <v-text-field dense label="开票日期" type="date" outlined prepend-icon="mdi-calendar-blank" v-model="editedItem.written_date"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" md="6">
-                                    <v-text-field dense label="发票类型" outlined prepend-icon="mdi-format-list-bulleted-type" v-model="editedItem.receipt_type"></v-text-field>
+                                    <v-text-field dense label="发票类型" outlined prepend-icon="mdi-calendar-blank" v-model="editedItem.invoice_kind"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" md="6">
+                                    <v-text-field dense label="发票种类" outlined prepend-icon="mdi-format-list-bulleted-type" v-model="editedItem.invoice_type"></v-text-field>
                                 </v-col>
                                   <v-col cols="12" md="6">
-                                    <v-text-field dense label="发票代码" outlined prepend-icon="mdi-barcode" v-model="editedItem.receipt_code"></v-text-field>
+                                    <v-text-field dense label="发票代码" outlined prepend-icon="mdi-barcode" v-model="editedItem.invoice_code"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" md="6">
                                     <v-text-field dense label="价税总合(元)" type="number"  outlined prepend-icon="mdi-cash" v-model="editedItem.total_amount"></v-text-field>
                                 </v-col>
+                                 <v-col cols="12" md="4">
+                                    <v-text-field dense label="税率" type="number" outlined prepend-icon="mdi-brightness-percent" v-model="editedItem.invoice_taxrate"></v-text-field>
+                                </v-col>
+                                  <v-col cols="12" md="4">
+                                    <v-text-field dense label="不含税金额(元)" type="number" disabled outlined prepend-icon="mdi-cash" v-model="editedItem.invoice_amount"></v-text-field>
+                                </v-col>
                                 <v-col cols="12" md="4">
-                                    <v-text-field dense label="税率" type="number"  outlined prepend-icon="mdi-brightness-percent" v-model="editedItem.receipt_taxrate"></v-text-field>
+                                    <v-text-field dense label="税金(元)" type="number" disabled outlined prepend-icon="mdi-cash" v-model="editedItem.invoice_tax"></v-text-field>
                                 </v-col>
-                                  <v-col cols="12" md="4">
-                                    <v-text-field dense label="金额(元)" type="number" disabled outlined prepend-icon="mdi-cash" v-model="editedItem.receipt_amount"></v-text-field>
-                                </v-col>
-                                  <v-col cols="12" md="4">
-                                    <v-text-field dense label="税金(元)" type="number" disabled outlined prepend-icon="mdi-cash" v-model="editedItem.receipt_tax"></v-text-field>
-                                </v-col>
-                                  
                               </v-row>
                               
                               <v-divider></v-divider>
@@ -123,7 +128,7 @@
                               <v-app-bar color="deep-purple accent-4">
                               <v-icon class="mr-5 yellow--text">mdi-alert-outline</v-icon>
                               <v-toolbar-title class="white--text">确定要删除发票编号为
-                                  <p class="d-inline yellow--text">{{editedItem.receipt_code}}</p>
+                                  <p class="d-inline yellow--text">{{editedItem.invoice_code}}</p>
                                   的这张发票吗</v-toolbar-title>
                               </v-app-bar>
                               <v-card-text class="white--text d-block my-5" >此项目的信息可作为
@@ -166,7 +171,7 @@ export default {
             dialogDelete: false,                                        
             btnloading: false,
             selectedloading:false,
-            purchase:{},
+            fund:{},
             uploadfiles:[],
 
             search_temp:'',
@@ -179,20 +184,18 @@ export default {
             editedItem:{},
             defaultItem:{},
             snacker:{sbar:false,stext:"",scolor:""},
-            breadcrumbs: [{text: '合同列表',disabled: false,to: '/finance/labour_contract'},
+            breadcrumbs: [{text: '明细表列表',disabled: false,to: '/finance/fund'},
                           {text: `XXXXXXX`,disabled: true,href: '#'},
-                          {text: '发票详情页',disabled: true,href: '#'}],
+                          {text: '开票详情页',disabled: true,href: '#'}],
             headers: [
-                    { text: '工程名称', value: 'contract_name',align: 'start',sortable: false},
-                    { text: '合同编号', value: 'contract_code',sortable: false},
-                    { text: '销方名称', value: 'supplier_name',sortable: false},
-                    { text: '发票类型', value: 'receipt_type',sortable: false},
-                    { text: '发票号码', value: 'receipt_code', sortable: false,},
-                    {text: '收发票日期',value: 'delivery_date',},
-                    { text: '开票日期', value: 'receipt_date'},
-                    { text: '金额(元)', value: 'receipt_amount'},
-                    { text: '税额(元)', value: 'receipt_tax'},
-                    { text: '税率', value: 'receipt_taxrate'},
+                    { text: '审批表编号', value: 'Approval_code',align: 'center',sortable: false},
+                    {text: '发票抬头', value: 'invoice_title',sortable: false},
+                    { text: '发票类型', value: 'invoice_kind',sortable: false},
+                    { text: '发票号码', value: 'invoice_code', sortable: false,},
+                    { text: '开票日期', value: 'written_date'},
+                    { text: '金额(元)', value: 'invoice_amount'},
+                    { text: '税额(元)', value: 'invoice_tax'},
+                    { text: '税率', value: 'invoice_taxrate'},
                     { text: '价税合计总额(元)', value: 'total_amount'},
                     { text: '', value: 'actions', sortable: false},
                     { text: '', value: 'delete', sortable: false},
@@ -222,11 +225,11 @@ export default {
 
         async deleteItemConfirm () {
             let id = this.editedItem._id
-            await this.$http.delete(`http://localhost:3000/receipt/${id}`,this.editedItem)
+            await this.$http.delete(`http://localhost:3000/fund_invoice/${id}`,this.editedItem)
                 .then(res=> {Object.assign(this.profiles[this.editedIndex], this.editedItem)
-                                this.switch_snap(true,"修改成功","green"),console.log(res)
+                                this.switch_snap(true,"删除成功","green"),console.log(res)
                                 this.profiles.splice(this.editedIndex, 1)})
-                .catch(err => {this.switch_snap(true,"修改失败","red"),console.log(err)})
+                .catch(err => {this.switch_snap(true,"删除失败","red"),console.log(err)})
         this.closeDelete()
         },
 
@@ -244,13 +247,13 @@ export default {
             this.btnloading = true
             if (this.editedIndex > -1) {
             let id = this.editedItem._id
-                delete this.editedItem._id
-                await this.$http.patch(`http://localhost:3000/receipt/${id}`,this.editedItem)
+                // delete this.editedItem._id
+                await this.$http.patch(`http://localhost:3000/fund_invoice/${id}`,this.editedItem)
                 .then(res=> {Object.assign(this.profiles[this.editedIndex], this.editedItem)
                                 this.switch_snap(true,"修改成功","green"),console.log(res)})
                 .catch(err => {this.switch_snap(true,"修改失败","red"),console.log(err)})
             } else {
-                await this.$http.post(`http://localhost:3000/receipt`,this.editedItem)
+                await this.$http.post(`http://localhost:3000/fund_invoice`,this.editedItem)
                 .then(res=> {this.editedItem._id=res.data._id;
                             this.profiles.push(this.editedItem)
                             this.switch_snap(true,"创建成功","green"),console.log(res)})
@@ -277,8 +280,8 @@ export default {
         async initialize () {
             this.dataloading = true
             let id = this.$route.params.id
-            await this.$http.get(`http://localhost:3000/receipt/searchBypurchase/${id}?per_page=1000&page=1&keyword=`)
-                .then(res=> {this.profiles = res.data.receiptlist
+            await this.$http.get(`http://localhost:3000/fund_invoice/searchByfund/${id}?per_page=1000&page=1&keyword=`)
+                .then(res=> {this.profiles = res.data.fund_invoicelist
                             for (var i=0; i < this.profiles.length ; ++i){
                                 delete this.profiles[i].createdAt
                                 delete this.profiles[i].updatedAt
@@ -288,15 +291,15 @@ export default {
                 .catch(err => {console.log(err)})
         },
 
-        getPurchase(){
+        getFund(){
             this.btnloading = true
             let id = this.$route.params.id
-            this.$http.get(`http://localhost:3000/purchase/${id}?fields=&populatefields=contract;belongsTocopartner`)
-                .then(res=> {this.purchase = res.data
+            this.$http.get(`http://localhost:3000/fund/${id}?fields=&populatefields=contract`)
+                .then(res=> {this.fund = res.data
                             this.breadcrumbs[1].text = res.data.contract_name
-                            this.breadcrumbs[0].text = res.data.supplier_name
-                            delete this.purchase.createdAt
-                            delete this.purchase.updatedAt
+                            this.breadcrumbs[2].text = res.data.contract_code
+                            delete this.fund.createdAt
+                            delete this.fund.updatedAt
                             this.btnloading = false
                             })
                 .catch(err => {console.log(err)})
@@ -319,8 +322,7 @@ export default {
         },
 
         setNum(value){
-            let newvalue = parseFloat(value)
-            return newvalue
+            console.log(value)
         },
 
         async UploadFiles(){
@@ -330,17 +332,17 @@ export default {
                 let file = this.$refs.inputFile.files[i];
                 formData.append('file', file);
             }
-            await this.$http.post(`http://localhost:3000/upload/multiplefilesTopath?keyword=${this.editedItem.contract_name}/劳务合同/${this.editedItem.supplier_name}/发票详情`,formData,
+            await this.$http.post(`http://localhost:3000/upload/multiplefilesTopath?keyword=${this.editedItem.contract_name}/销项票详情/${this.editedItem.Approval_code}`,formData,
                 {headers: {'Content-Type': 'multipart/form-data'},})
                 .then(res => {document = res.data.filelist,console.log(document)})
                 .catch(err => {console.log(err)})
-            await this.$http.post(`http://localhost:3000/receipt/${this.editedItem._id}/document`,{"document":document})
+            await this.$http.post(`http://localhost:3000/fund_invoice/${this.editedItem._id}/document`,{"document":document})
             .then(res =>{console.log(res);this.profiles[this.editedIndex].document.push(...document)})
             .catch(err =>{console.log(err)})
         },
         async Deletefile(index){
           this.profiles[this.editedIndex].document.splice(index,1)
-            await this.$http.delete(`http://localhost:3000/receipt/${this.editedItem._id}/document`,{"index":index})
+            await this.$http.delete(`http://localhost:3000/fund_invoice/${this.editedItem._id}/document`,{"index":index})
             .then(res =>{console.log(res);})
             .catch(err =>{console.log(err)})
         }
@@ -352,33 +354,36 @@ export default {
     },
     mounted(){
       this.initialize()
-      this.getPurchase()
+      this.getFund()
       this.paramsid = this.$route.params.id
     }, 
     activated(){
         if(this.paramsid !== this.$route.params.id){
-            this.getPurchase()
+            this.getFund()
             this.initialize()
             this.paramsid = this.$route.params.id
         }
     },
     watch:{
-      purchase(val){
-        const {supplier,supplier_name,contract,contract_name,contract_code} = val
-        this.editedItem = {purchase:this.paramsid,supplier,supplier_name,contract,contract_name,contract_code,receipt_amount:0,receipt_tax:0,receipt_taxrate:0,total_amount:0}
-        this.defaultItem = {purchase:this.paramsid,supplier,supplier_name,contract,contract_name,contract_code,receipt_amount:0,receipt_tax:0,receipt_taxrate:0,total_amount:0}
+      fund(val){
+        const {contract_name,contract_code,tax_rate,Management_fee,stamp_tax,income_tax,insurance} = val
+        this.editedItem = {fund:this.paramsid,contract_name,contract_code,invoice_tax:0,total_amount:0,invoice_amount:0,invoice_taxrate:0,
+        tax_rate,Management_fee,stamp_tax,income_tax,insurance}
+        this.defaultItem = {fund:this.paramsid,contract_name,contract_code,invoice_tax:0,total_amount:0,invoice_amount:0,invoice_taxrate:0,
+        tax_rate,Management_fee,stamp_tax,income_tax,insurance}
         console.log(this.editedItem)
       },
-      'editedItem.receipt_taxrate'(val){
-            this.editedItem.receipt_taxrate= parseFloat(val)
-            this.editedItem.receipt_tax = parseFloat(parseFloat(this.editedItem.total_amount/(1+val)*val).toFixed(2))
-            this.editedItem.receipt_amount = parseFloat(parseFloat(this.editedItem.total_amount/(1+val)).toFixed(2))
+      'editedItem.invoice_taxrate'(val){
+          this.editedItem.invoice_taxrate = parseFloat(val)
+            this.editedItem.invoice_tax = parseFloat((this.editedItem.total_amount/(1+val)*val).toFixed(2))
+            this.editedItem.invoice_amount = parseFloat((this.editedItem.total_amount/(1+val)).toFixed(2))
+            console.log(this.editedItem)
         },
         'editedItem.total_amount'(val){
-            this.editedItem.total_amount= parseFloat(val)
-            this.editedItem.receipt_tax = parseFloat((val/(1+this.editedItem.receipt_taxrate)*this.editedItem.receipt_taxrate).toFixed(2))
-            this.editedItem.receipt_amount = parseFloat(val/(1+this.editedItem.receipt_taxrate).toFixed(2))
-            console.log(this.editedItem.total_amount,this.editedItem.receipt_amount,this.editedItem.receipt_taxrate,this.editedItem.receipt_tax)
+            this.editedItem.total_amount = parseFloat(val)
+            this.editedItem.invoice_tax = parseFloat((val/(1+this.editedItem.invoice_taxrate)*this.editedItem.invoice_taxrate).toFixed(2))
+            this.editedItem.invoice_amount = parseFloat((val/(1+this.editedItem.invoice_taxrate)).toFixed(2))
+            console.log(this.editedItem)
         }
     }
 }

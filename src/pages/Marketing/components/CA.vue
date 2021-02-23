@@ -1,6 +1,5 @@
 <template>
-    <v-app class="blue accent-2 rounded-lg">
-        <v-container>
+    <v-app class="blue accent-2 rounded-lg pa-3">
             <v-row dense>
                 <v-col cols="12" md="12">
                     <v-card dense color="white" min-height="700">
@@ -28,7 +27,10 @@
                                                   <v-text-field dense label="CA锁名" outlined prepend-icon="mdi-account" v-model="editedItem.name"></v-text-field>
                                               </v-col>
                                               <v-col cols="12" md="7">
-                                                  <v-text-field dense label="所属官网" outlined prepend-icon="mdi-web"  v-model="editedItem.officalWeb"></v-text-field>
+                                                  <v-text-field dense label="所属官网" outlined prepend-icon="mdi-web" v-model="editedItem.officalWeb"></v-text-field>
+                                              </v-col>
+                                              <v-col cols="12" md="6">
+                                                  <v-text-field dense label="备案省份" outlined prepend-icon="mdi-location-enter" v-model="editedItem.belongedarea"></v-text-field>
                                               </v-col>
                                               <v-col cols="12" md="6">
                                                   <v-text-field dense label="账号" outlined prepend-icon="mdi-card" v-model="editedItem.account"></v-text-field>
@@ -77,9 +79,14 @@
                                     </v-dialog>
                                 </v-toolbar>
                             </template>
-                            <template v-slot:[`item.actions`]="{ item }">
-                                <v-icon small class="mr-2"  @click="editItem(item)">mdi-pencil</v-icon>
-                                <v-icon  small  @click="deleteItem(item)">mdi-delete</v-icon>
+                            <template v-slot:[`item.record`]="{ item }">
+                                <v-chip color="green" dark>{{ item.record }}</v-chip>
+                            </template>
+                            <template v-slot:[`item.edit`]="{ item }">
+                                <v-btn class="white--text" small @click="editItem(item)" :loading='dataloading' color="primary">修改<v-icon right dark>mdi-pencil</v-icon></v-btn>     
+                            </template>
+                            <template v-slot:[`item.delete`]="{ item }">
+                                <v-btn class="white--text" small @click="deleteItem(item)" :loading='dataloading' color="red">删除<v-icon right dark>mdi-delete</v-icon></v-btn>
                             </template>
                             <template v-slot:[`item.officalWeb`]="{ item }">
                               <a :href="item.officalWeb" target="_blank" dark>{{ item.officalWeb }}</a>
@@ -88,7 +95,6 @@
                     </v-card>
                 </v-col>
             </v-row>
-        </v-container>
     </v-app>
 </template>
 <script>
@@ -106,13 +112,16 @@ export default {
             editedItem: {},
             defaultItem: {},
 
-            headers: [{text: 'CA名',align: 'start',sortable: false,value: 'name',},
-                    { text: '所属官网', value: 'officalWeb' },
+            headers: [{text: 'CA名',align: 'center',sortable: false,value: 'name',},
+                    { text: '所属官网', align: 'center', value: 'officalWeb' },
+                    { text: '备案所属地方', align: 'center', value: 'belongedarea' },
                     { text: '账号', value: 'account' },
                     { text: '密码', value: 'password' },
                     { text: '经办人', value: 'proccesser',sortable: false, },
-                    { text: '过期时间', value: 'expirationDate',sortable: false, },
-                    { text: '修改/删除', value: 'actions', sortable: false },
+                    { text: '过期时间', value: 'expirationDate'},
+                    { text: '使用状况', value: 'record'},
+                    { text: '', value: 'edit', sortable: false},
+                    { text: '', value: 'delete', sortable: false},
                     ],
         }
     },
@@ -167,6 +176,7 @@ export default {
           {
             name: '深圳市建筑工务署',
             officalWeb: "http://szwb.sz.gov.cn/",
+            belongedarea:'广东省深圳市',
             account: "CCZZS",
             password:"AB123",
             registerDate:"2021-01-21",

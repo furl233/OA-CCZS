@@ -51,11 +51,10 @@ export default {
         return{
         links:[
             {icon:'fas fa-home',text:'主页',route:'/purchase/home'},
-            {icon:'fa fa-money-check-alt',text:'采购管理',route:'/purchase/material'},
-            {icon:'fas fa-hard-hat',text:'分包管理',route:'/purchase/outsource'},
-            {icon:'fas fa-table',text:'采购清单',route:'/purchase/order'},
-            {icon:'fas fa-hard-hat',text:'发票管理',route:'/purchase/receipt'},
-            {icon:'fas fa-handshake',text:'供应商录入',route:'/purchase/supplies'},
+            {icon:'fas fa-handshake',text:'供应商库',route:'/purchase/supplies'},
+            {icon:'fas fa-file',text:'采购合同管理',route:'/purchase/purchasereceipt'},
+            {icon:'fas fa-file',text:'分包合同管理',route:'/purchase/outsourcereceipt'},
+            
         ],
         slides:[
             '申报2020年优秀项目经理',

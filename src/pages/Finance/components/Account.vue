@@ -1,6 +1,5 @@
 <template>
-    <v-app class="blue accent-2 rounded-lg">
-        <v-container>
+    <v-app class="blue accent-2 rounded-lg pa-3">
             <v-row dense>
                 <v-col cols="12" md="12"> 
                     <v-card dense color="white" min-height="700">
@@ -16,13 +15,13 @@
                                     <v-spacer></v-spacer>
                                     <v-dialog v-model="dialog" max-width="600px" persistent scrollable>
                                     <template v-slot:activator="{ on, attrs }">
-                                        <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">新增账户</v-btn>
+                                        <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on" :loading='dataloading'>新增账户</v-btn>
                                     </template>
                                     <v-card>
                                         <v-app-bar color="indigo">
                                             <v-toolbar-title class="white--text">{{formTitle}}</v-toolbar-title>
                                             <v-spacer></v-spacer>
-                                            <v-btn icon @click.stop="close" dark>
+                                            <v-btn icon @click.stop="close" dark :disabled='dataloading'>
                                                 <v-icon>mdi-close-box</v-icon>
                                             </v-btn>
                                         </v-app-bar>
@@ -57,7 +56,7 @@
                                                 <div v-if="editedIndex > -1">
                                                     <v-card-subtitle>上传文件:
                                                         <input type="file" ref="inputFile" style="display:none" @change="UploadFiles($event)" multiple="multiple">
-                                                            <v-btn color="indigo white--text" class="ml-6"  @click="fileinput">Upload
+                                                            <v-btn color="indigo white--text" class="ml-6"  @click="fileinput" :loading='dataloading'>Upload
                                                                 <v-icon right dark>mdi-cloud-upload</v-icon>
                                                             </v-btn>
                                                     </v-card-subtitle>
@@ -120,14 +119,13 @@
                                     </v-dialog>
                                 </v-toolbar>
                             </template>
-                             <template v-slot:[`item.actions`]="{ item }">
-                                <v-icon small class="mr-2"  @click="editItem(item)">mdi-pencil</v-icon>
+                             <template v-slot:[`item.actions`]="{ item }">                         
+                                <v-btn class="white--text" small @click="editItem(item)" color="primary">修改<v-icon right dark>mdi-pencil</v-icon></v-btn>
                             </template>
                         </v-data-table>
                     </v-card>
                 </v-col>
             </v-row>
-        </v-container>
     </v-app>
 </template>
 <script>
@@ -163,7 +161,7 @@ export default {
                     { text: '经办人', value: 'processer',sortable: false},
                     { text: '期初金额', value: 'openingbalance'},
                     { text: '所剩余额', value: 'currentbalance'},
-                    { text: '修改', value: 'actions', sortable: false},
+                    { text: '', value: 'actions', sortable: false},
                     ],
         }
             
@@ -238,7 +236,7 @@ export default {
                 .catch(err => {console.log(err)})
         },
         getemployee(){
-          this.$http.get(`http://localhost:3000/users/getallusers?per_page=1000&page=1&keyword=财务部`)
+          this.$http.get(`http://localhost:3000/users/getallusers?per_page=1000&page=1&keyword=`)
           .then(res=> {
             let employees =  res.data.userlist
             for (var i=0; i < employees.length ; ++i){
@@ -274,7 +272,7 @@ export default {
                 let file = this.$refs.inputFile.files[i];
                 formData.append('file', file);
             }
-            await this.$http.post(`http://localhost:3000/upload/multiplefilesTopath?department=财务部&category=银行账号&subcategory=${this.editedItem.name}`,formData,
+            await this.$http.post(`http://localhost:3000/upload/multiplefilesTopath?keyword=财务部/银行账号/${this.editedItem.name}`,formData,
                 {headers: {'Content-Type': 'multipart/form-data'},})
                 .then(res => {document = res.data.filelist,console.log(document)})
                 .catch(err => {console.log(err)})

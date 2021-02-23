@@ -4,14 +4,17 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify';
 import VCharts from 'v-charts'
+import VueApexCharts from 'vue-apexcharts'
 import axios from 'axios'
 import '@/svg/index.js'
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios 
 Vue.use(VCharts)
+Vue.component('apexchart', VueApexCharts)
 
 
+axios.defaults.baseURL = 'http://localhost:3000/'
 axios.interceptors.request.use(function(config) {
   config.headers.Authorization = "Bearer " + store.state.token;
   console.info(config);

@@ -51,10 +51,11 @@ export default {
         return{
         links:[
             {icon:'fas fa-home',text:'主页',route:'/marketing/home'},
-            {icon:'fa fa-microchip',text:'ca锁管理',route:'/marketing/ca'},
+            {icon:'fa fa-microchip',text:'备案管理',route:'/marketing/ca'},
             {icon:'fas fa-user-cog',text:'合作人管理',route:'/marketing/co-partner'},
-            {icon:'fas fa-file',text:'项目登记',route:'/marketing/contract'},
+            {icon:'mdi-sign-text',text:'项目登记',route:'/marketing/contract'},
             {icon:'fas fa-file-invoice',text:'投标管理',route:'/marketing/tender'},
+            {icon:'fas fa-file',text:'台账',route:'/marketing/contract'},
         ],
         slides:[
             '申报2020年优秀项目经理',

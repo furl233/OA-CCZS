@@ -15,4 +15,5 @@ export const files= {
     pptx:{icon:'mdi-file-powerpoint',color:"red darken-4"},
     xls:{icon:'mdi-file-excel',color:"green"},
     xlsx: {icon:'mdi-file-excel',color:"green"},
+    csv: {icon:'mdi-file-excel',color:"green"},
 }

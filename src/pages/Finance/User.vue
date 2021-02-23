@@ -2,7 +2,7 @@
   <v-app>
       <FNNavBar></FNNavBar>
       <TopBar></TopBar>
-        <v-content >
+        <v-content>
           <v-layout column class="d-flex flex-column">
             <v-scroll-y-transition mode="out-in">
               <keep-alive>
